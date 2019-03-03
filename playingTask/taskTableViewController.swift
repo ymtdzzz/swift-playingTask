@@ -36,6 +36,11 @@ class taskTableViewController: UITableViewController {
                     todoList.append(contentsOf: unarchiveTodoList)
                 }
             } catch {
+                print(error)
+                let domain = Bundle.main.bundleIdentifier!
+                UserDefaults.standard.removePersistentDomain(forName: domain)
+                UserDefaults.standard.synchronize()
+                print("リセット")
                 // エラー処理なし
             }
         }
@@ -49,9 +54,48 @@ class taskTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = taskTableView.dequeueReusableCell(withIdentifier: "todoCell", for: indexPath)
-        // 行番号に合ったToDoのタイトルを取得
-        let todoTitle = todoList[indexPath.row].todoTitle
+        let cell = taskTableView.dequeueReusableCell(withIdentifier: "TaskTableViewCell", for: indexPath) as! TaskTableViewCell
+        // 行番号に合ったToDoの情報を取得
+        let todo = todoList[indexPath.row]
+        cell.taskTitle.text = todo.todoTitle
+        cell.willTime.text = String(todo.willTime!)
+        cell.didTime.text = "0"
+        cell.category.text = todo.category
+        if todo.monday == true {
+            cell.mondayLabel.alpha = 1.0
+        } else {
+            cell.mondayLabel.alpha = 0.2
+        }
+        if todo.tuesday == true {
+            cell.tuesdayLabel.alpha = 1.0
+        } else {
+            cell.tuesdayLabel.alpha = 0.2
+        }
+        if todo.wednesday == true {
+            cell.wednesdayLabel.alpha = 1.0
+        } else {
+            cell.wednesdayLabel.alpha = 0.2
+        }
+        if todo.thursday == true {
+            cell.thursdayLabel.alpha = 1.0
+        } else {
+            cell.thursdayLabel.alpha = 0.2
+        }
+        if todo.friday == true {
+            cell.fridayLabel.alpha = 1.0
+        } else {
+            cell.fridayLabel.alpha = 0.2
+        }
+        if todo.saturday == true {
+            cell.saturdayLabel.alpha = 1.0
+        } else {
+            cell.saturdayLabel.alpha = 0.2
+        }
+        if todo.sunday == true {
+            cell.sundayLabel.alpha = 1.0
+        } else {
+            cell.sundayLabel.alpha = 0.2
+        }
         
         return cell
     }
@@ -136,8 +180,8 @@ class MyTodo: NSObject,  NSSecureCoding {
     required init?(coder aDecoder: NSCoder) {
         todoTitle = aDecoder.decodeObject(forKey: "todoTitle") as? String
         category = aDecoder.decodeObject(forKey: "category") as? String
-        willTime = aDecoder.decodeInteger(forKey: "willTime")
-        didTime = aDecoder.decodeInteger(forKey: "didTime")
+        willTime = aDecoder.decodeObject(forKey: "willTime") as? Int
+        didTime = aDecoder.decodeObject(forKey: "didTime") as? Int
         monday = aDecoder.decodeBool(forKey: "monday")
         tuesday = aDecoder.decodeBool(forKey: "tuesday")
         wednesday = aDecoder.decodeBool(forKey: "wednesday")

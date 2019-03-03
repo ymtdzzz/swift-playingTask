@@ -22,7 +22,7 @@ class createTaskViewController: UIViewController, UITableViewDelegate, UITableVi
     // Done押下
     @IBAction func tapDone(_ sender: Any) {
         // 入力チェック
-        if todoTitle.text == "" || (selectedWeek[0] == false && selectedWeek[1] == false && selectedWeek[2] == false && selectedWeek[3] == false && selectedWeek[4] == false && selectedWeek[5] == false && selectedWeek[6] == false) {
+        if todoTitle.text == "" || (selectedWeek[0] == false && selectedWeek[1] == false && selectedWeek[2] == false && selectedWeek[3] == false && selectedWeek[4] == false && selectedWeek[5] == false && selectedWeek[6] == false) || selectedCategory == nil {
             let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
             alert.title = "入力エラー"
             alert.message = "全ての項目を入力して下さい。"
@@ -39,6 +39,7 @@ class createTaskViewController: UIViewController, UITableViewDelegate, UITableVi
         let myTodo = MyTodo()
         myTodo.todoTitle = todoTitle.text!
         myTodo.willTime = Int(timePicker.countDownDuration)
+        myTodo.didTime = 0
         myTodo.category = selectedCategory
         myTodo.monday = selectedWeek[0]
         myTodo.tuesday = selectedWeek[1]
@@ -46,7 +47,7 @@ class createTaskViewController: UIViewController, UITableViewDelegate, UITableVi
         myTodo.thursday = selectedWeek[3]
         myTodo.friday = selectedWeek[4]
         myTodo.saturday = selectedWeek[5]
-        myTodo.friday = selectedWeek[6]
+        myTodo.sunday = selectedWeek[6]
         
         // 配列の先頭に挿入
         prevVc.todoList.insert(myTodo, at: 0)

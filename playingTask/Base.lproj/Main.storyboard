@@ -33,21 +33,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" id="eEh-U1-IUY">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="todoCell" id="cKK-OL-q1T">
-                                <rect key="frame" x="0.0" y="148" width="375" height="120"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TaskTableViewCell" id="cKK-OL-q1T" customClass="TaskTableViewCell" customModule="playingTask" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="120"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cKK-OL-q1T" id="10H-j8-lDF">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="119.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TaskTitle" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rH1-pi-ewx">
-                                            <rect key="frame" x="10" y="35" width="83.5" height="26.5"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="TaskTitle" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rH1-pi-ewx">
+                                            <rect key="frame" x="0.0" y="46" width="375" height="26.5"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -132,14 +128,33 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="カテゴリ" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xEe-t8-O1F">
+                                            <rect key="frame" x="16" y="11" width="70" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" red="0.99942404029999998" green="0.98555368190000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="QHd-m6-Acn" secondAttribute="trailing" constant="10" id="HGu-C6-kdK"/>
-                                        <constraint firstItem="rH1-pi-ewx" firstAttribute="top" secondItem="10H-j8-lDF" secondAttribute="top" constant="35" id="SS2-Gv-ppf"/>
                                         <constraint firstItem="QHd-m6-Acn" firstAttribute="top" secondItem="10H-j8-lDF" secondAttribute="top" constant="10" id="qCa-CM-esL"/>
-                                        <constraint firstItem="rH1-pi-ewx" firstAttribute="leading" secondItem="10H-j8-lDF" secondAttribute="leading" constant="10" id="wmr-Wl-Sii"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="category" destination="xEe-t8-O1F" id="Yqg-M2-1VE"/>
+                                    <outlet property="didTime" destination="w7x-x3-b3P" id="GKJ-KU-9iY"/>
+                                    <outlet property="fridayLabel" destination="e0P-Kg-Wyr" id="81m-Zg-WSG"/>
+                                    <outlet property="mondayLabel" destination="yvp-sp-5wb" id="OaJ-gB-K9Q"/>
+                                    <outlet property="saturdayLabel" destination="s9M-By-4TA" id="LXX-ZN-pBD"/>
+                                    <outlet property="sundayLabel" destination="Jli-9p-yCf" id="hmX-5f-ZDL"/>
+                                    <outlet property="taskTitle" destination="rH1-pi-ewx" id="Zsf-wl-w4P"/>
+                                    <outlet property="thursdayLabel" destination="d2j-9m-TGL" id="Q57-HD-NXD"/>
+                                    <outlet property="tuesdayLabel" destination="WjY-Sq-sbA" id="xph-NC-FFn"/>
+                                    <outlet property="wednesdayLabel" destination="9kg-vR-770" id="yJI-KX-OfS"/>
+                                    <outlet property="willTime" destination="rRU-rJ-P4h" id="DVP-x7-dr2"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
