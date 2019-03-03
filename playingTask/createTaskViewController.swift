@@ -29,10 +29,42 @@ class createTaskViewController: UIViewController, UITableViewDelegate, UITableVi
             alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }
-//        //Navigation Controllerを取得
-//        let nav = self.presentingViewController  as! UINavigationController
-//        //呼び出し元のView Controllerを遷移履歴から取得しパラメータを渡す
-//        let prevVc = nav.viewControllers[nav.viewControllers.count-1] as! taskTableViewController
+        
+        //Navigation Controllerを取得
+        let nav = self.presentingViewController  as! UINavigationController
+        //呼び出し元のView Controllerを遷移履歴から取得しパラメータを渡す
+        let prevVc = nav.viewControllers[nav.viewControllers.count-1] as! taskTableViewController
+        
+        // ToDoを作成
+        let myTodo = MyTodo()
+        myTodo.todoTitle = todoTitle.text!
+        myTodo.willTime = Int(timePicker.countDownDuration)
+        myTodo.category = selectedCategory
+        myTodo.monday = selectedWeek[0]
+        myTodo.tuesday = selectedWeek[1]
+        myTodo.wednesday = selectedWeek[2]
+        myTodo.thursday = selectedWeek[3]
+        myTodo.friday = selectedWeek[4]
+        myTodo.saturday = selectedWeek[5]
+        myTodo.friday = selectedWeek[6]
+        
+        // 配列の先頭に挿入
+        prevVc.todoList.insert(myTodo, at: 0)
+        
+        // テーブルに行が追加されたことをテーブルに通知
+        prevVc.taskTableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: UITableView.RowAnimation.right)
+        
+        // ToDoの保存処理
+        let userDefaults = UserDefaults.standard
+        // Data型にエンコード
+        do {
+            let data = try NSKeyedArchiver.archivedData(withRootObject: prevVc.todoList, requiringSecureCoding: true)
+            userDefaults.set(data, forKey: "todoList")
+            userDefaults.synchronize()
+        } catch {
+            // エラー処理なし
+        }
+        
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -124,6 +156,8 @@ class createTaskViewController: UIViewController, UITableViewDelegate, UITableVi
             alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }
+
+
     }
 
 }

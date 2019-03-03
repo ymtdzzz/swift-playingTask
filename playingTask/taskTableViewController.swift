@@ -29,29 +29,32 @@ class taskTableViewController: UITableViewController {
         super.viewDidLoad()
         
         // 保存しているToDoを読み込む
+        let userDefaults = UserDefaults.standard
+        if let storedTodoList = userDefaults.object(forKey: "todoList") as? Data {
+            do {
+                if let unarchiveTodoList = try NSKeyedUnarchiver.unarchivedObject(ofClasses: [NSArray.self, MyTodo.self], from: storedTodoList) as? [MyTodo] {
+                    todoList.append(contentsOf: unarchiveTodoList)
+                }
+            } catch {
+                // エラー処理なし
+            }
+        }
     }
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
-
+    // テーブルの行数
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return todoList.count
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        let cell = taskTableView.dequeueReusableCell(withIdentifier: "todoCell", for: indexPath)
+        // 行番号に合ったToDoのタイトルを取得
+        let todoTitle = todoList[indexPath.row].todoTitle
+        
         return cell
     }
-    */
 
     /*
     // Override to support conditional editing of the table view.

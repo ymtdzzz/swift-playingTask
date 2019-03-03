@@ -156,7 +156,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="pyF-89-m73" id="7FZ-Rm-X4Z"/>
-                        <outlet property="taskTableView" destination="pyF-89-m73" id="zav-ht-TaI"/>
+                        <outlet property="taskTableView" destination="pyF-89-m73" id="PHy-y8-YNw"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9kJ-uH-y0M" userLabel="First Responder" sceneMemberID="firstResponder"/>
