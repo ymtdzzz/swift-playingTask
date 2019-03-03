@@ -57,9 +57,14 @@ class taskTableViewController: UITableViewController {
         let cell = taskTableView.dequeueReusableCell(withIdentifier: "TaskTableViewCell", for: indexPath) as! TaskTableViewCell
         // 行番号に合ったToDoの情報を取得
         let todo = todoList[indexPath.row]
+        
+        let formatter = DateComponentsFormatter()
+        formatter.unitsStyle = .positional
+        formatter.allowedUnits = [.minute,.hour,.second]
+        
         cell.taskTitle.text = todo.todoTitle
-        cell.willTime.text = String(todo.willTime!)
-        cell.didTime.text = "0"
+        cell.willTime.text = formatter.string(from: TimeInterval(todo.willTime!))
+        cell.didTime.text = formatter.string(from: TimeInterval(todo.didTime!))
         cell.category.text = todo.category
         if todo.monday == true {
             cell.mondayLabel.alpha = 1.0
@@ -97,7 +102,68 @@ class taskTableViewController: UITableViewController {
             cell.sundayLabel.alpha = 0.2
         }
         
+        let progressWidth = (Float(cell.frame.width) * (Float(todo.didTime!)/Float(todo.willTime!)))
+        print(cell.frame.width)
+        print(todo.didTime!)
+        print(todo.willTime!)
+        print(Float(todo.didTime!)/Float(todo.willTime!))
+        print(progressWidth)
+        cell.progressBar.frame.size = CGSize(width: Int(progressWidth), height: 20)
+        
+        let dTime = Int(todo.didTime!)
+        let wTime = Int(todo.willTime!)
+        
+        // クリアしたか？
+        if todo.isDone == false {
+            if dTime >= wTime {
+                todo.isDone = true
+                
+                // おめでとうページに遷移
+                let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "omedetou") as? ClearViewController
+                nextVC?.modalTransitionStyle = .flipHorizontal
+                nextVC?.data = todo
+                present(nextVC!, animated: true, completion: nil)
+            }
+        }
+        
+        if todo.isDone == true {
+            cell.clearMask.alpha = 0.8
+            cell.clearLabel.alpha = 1.0
+            cell.clearLabel.text = "CLEAR"
+            cell.isUserInteractionEnabled = false
+        } else {
+            cell.clearMask.alpha = 0.0
+            cell.clearLabel.alpha = 0.0
+            cell.clearLabel.text = ""
+        }
+        
         return cell
+    }
+    
+    // セルが編集可能か
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    // セルを削除
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        // 削除処理かどうか
+        if editingStyle == UITableViewCell.EditingStyle.delete {
+            // ToDoリストから削除
+            todoList.remove(at: indexPath.row)
+            // セルを削除
+            tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.fade)
+            // データ保存
+            do {
+                let data: Data =  try NSKeyedArchiver.archivedData(withRootObject: todoList, requiringSecureCoding: true)
+                // userDefaultsに保存
+                let userDefaults = UserDefaults.standard
+                userDefaults.set(data, forKey: "todoList")
+                userDefaults.synchronize()
+            } catch {
+                
+            }
+        }
     }
 
     /*
@@ -135,15 +201,23 @@ class taskTableViewController: UITableViewController {
     }
     */
 
-    /*
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    // セグエで移動するときにわたす
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        // セグエがshowDoTaskだった場合の処理
+        if segue.identifier == "showDoTask" {
+            // タップした行番号を取得
+            if let indexPath = self.taskTableView.indexPathForSelectedRow {
+                // 行のデータを取り出す
+                let todo = todoList[(indexPath as NSIndexPath).row]
+                print(todo.todoTitle)
+                // 移動先のビューコントローラのdataプロパティに値を設定する
+                (segue.destination as! DoTaskViewController).data = todo
+                (segue.destination as! DoTaskViewController).index = indexPath.row
+            }
+        }
     }
-    */
 
 }
 
@@ -161,6 +235,8 @@ class MyTodo: NSObject,  NSSecureCoding {
     var didTime:Int?
     // ジャンル
     var category:String?
+    // 完了フラグ
+    var isDone:Bool = false
     
     // 曜日
     var monday:Bool = false
@@ -189,6 +265,7 @@ class MyTodo: NSObject,  NSSecureCoding {
         friday = aDecoder.decodeBool(forKey: "friday")
         saturday = aDecoder.decodeBool(forKey: "saturday")
         sunday = aDecoder.decodeBool(forKey: "sunday")
+        isDone = aDecoder.decodeBool(forKey: "isDone")
     }
     // エンコード処理
     func encode(with aCoder: NSCoder) {
@@ -203,5 +280,6 @@ class MyTodo: NSObject,  NSSecureCoding {
         aCoder.encode(friday, forKey: "friday")
         aCoder.encode(saturday, forKey: "saturday")
         aCoder.encode(sunday, forKey: "sunday")
+        aCoder.encode(isDone, forKey: "isDone")
     }
 }

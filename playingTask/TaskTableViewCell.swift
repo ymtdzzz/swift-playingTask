@@ -20,6 +20,9 @@ class TaskTableViewCell: UITableViewCell {
     @IBOutlet weak var saturdayLabel: UILabel!
     @IBOutlet weak var sundayLabel: UILabel!
     @IBOutlet weak var category: UILabel!
+    @IBOutlet weak var progressBar: UIView!
+    @IBOutlet weak var clearLabel: UILabel!
+    @IBOutlet weak var clearMask: UIView!
     
     
     override func awakeFromNib() {
