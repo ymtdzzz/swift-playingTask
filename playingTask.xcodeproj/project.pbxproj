@@ -23,6 +23,9 @@
 		75A820CE222BEFE600B47365 /* sagyou.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 75A820CA222BEFE600B47365 /* sagyou.mp3 */; };
 		75A820CF222BEFE600B47365 /* kaji.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 75A820CB222BEFE600B47365 /* kaji.mp3 */; };
 		75A820D1222BFB0900B47365 /* ClearViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A820D0222BFB0900B47365 /* ClearViewController.swift */; };
+		75A820D4222EA14B00B47365 /* AdvencedTaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A820D2222EA14B00B47365 /* AdvencedTaskTableViewCell.swift */; };
+		75A820D5222EA14B00B47365 /* AdvencedTaskTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75A820D3222EA14B00B47365 /* AdvencedTaskTableViewCell.xib */; };
+		75A820DB222ECA7300B47365 /* addTaskButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A820DA222ECA7300B47365 /* addTaskButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +47,9 @@
 		75A820CA222BEFE600B47365 /* sagyou.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = sagyou.mp3; path = music/sagyou.mp3; sourceTree = SOURCE_ROOT; };
 		75A820CB222BEFE600B47365 /* kaji.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = kaji.mp3; path = music/kaji.mp3; sourceTree = SOURCE_ROOT; };
 		75A820D0222BFB0900B47365 /* ClearViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearViewController.swift; sourceTree = "<group>"; };
+		75A820D2222EA14B00B47365 /* AdvencedTaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvencedTaskTableViewCell.swift; sourceTree = "<group>"; };
+		75A820D3222EA14B00B47365 /* AdvencedTaskTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdvencedTaskTableViewCell.xib; sourceTree = "<group>"; };
+		75A820DA222ECA7300B47365 /* addTaskButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addTaskButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +91,9 @@
 				75A820A8222B692C00B47365 /* AppDelegate.swift */,
 				75A820AA222B692C00B47365 /* ViewController.swift */,
 				75A820AC222B692C00B47365 /* Main.storyboard */,
+				75A820DA222ECA7300B47365 /* addTaskButton.swift */,
+				75A820D2222EA14B00B47365 /* AdvencedTaskTableViewCell.swift */,
+				75A820D3222EA14B00B47365 /* AdvencedTaskTableViewCell.xib */,
 				75A820D0222BFB0900B47365 /* ClearViewController.swift */,
 				75A820C0222BD2D000B47365 /* DoTaskViewController.swift */,
 				75A820BC222B7E9E00B47365 /* createTaskViewController.swift */,
@@ -157,6 +166,7 @@
 			files = (
 				75A820CE222BEFE600B47365 /* sagyou.mp3 in Resources */,
 				75A820C3222BED9C00B47365 /* Images.xcassets in Resources */,
+				75A820D5222EA14B00B47365 /* AdvencedTaskTableViewCell.xib in Resources */,
 				75A820CF222BEFE600B47365 /* kaji.mp3 in Resources */,
 				75A820B3222B692D00B47365 /* LaunchScreen.storyboard in Resources */,
 				75A820AE222B692C00B47365 /* Main.storyboard in Resources */,
@@ -176,10 +186,12 @@
 			files = (
 				75A820C1222BD2D000B47365 /* DoTaskViewController.swift in Sources */,
 				75A820BB222B7ADB00B47365 /* taskTableViewController.swift in Sources */,
+				75A820D4222EA14B00B47365 /* AdvencedTaskTableViewCell.swift in Sources */,
 				75A820AB222B692C00B47365 /* ViewController.swift in Sources */,
 				75A820BF222BBAF500B47365 /* TaskTableViewCell.swift in Sources */,
 				75A820A9222B692C00B47365 /* AppDelegate.swift in Sources */,
 				75A820BD222B7E9E00B47365 /* createTaskViewController.swift in Sources */,
+				75A820DB222ECA7300B47365 /* addTaskButton.swift in Sources */,
 				75A820D1222BFB0900B47365 /* ClearViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
